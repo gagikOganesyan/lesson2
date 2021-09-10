@@ -1,4 +1,6 @@
 import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Task1 {
 
@@ -65,14 +67,110 @@ public class Task1 {
             changeIndex(task7, timesExecute);
         }
         printArray(task7);
+
+        // Lesson 3
+        printTaskNumber(1);
+        int size = 5;
+        int[][] array2d = new int[size][size];
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if ((i == j) || (i == size - 1 - j)) {
+                    array2d[i][j] = 1;
+                }
+            }
+        }
+        print2dArray(array2d);
+
+//        printTaskNumber(2);
+//        Random random = new Random();
+//        int x = random.nextInt(10);
+//        System.out.println(x);
+//        boolean needGame = true;
+//        Scanner scanner = new Scanner(System.in);
+//        Scanner scanner2 = new Scanner(System.in);
+//        while (needGame) {
+//            for (int i = 0; i < 4; i++) {
+//                print("Введите число от 0 до 9");
+//                int enter = scanner.nextInt();
+//                if (enter > x) {
+//                    print("Введённое число больше загаданного");
+//                } else if (enter < x) {
+//                    print("Введённое число меньше загаданного");
+//                } else {
+//                    print("Вы угадали! Поздравляем!");
+//                    break;
+//                }
+//            }
+//            print("Повторить игру еще раз? 1 – да / 0 – нет");
+//            int answer = scanner2.nextInt();
+//            needGame = answer == 1;
+//        }
+//        scanner.close();
+//        scanner2.close();
+
+
+        printTaskNumber(3);
+        String[] words = {"apple", "orange", "lemon", "banana", "apricot",
+                "avocado", "broccoli", "carrot", "cherry", "garlic", "grape",
+                "melon", "leak", "kiwi", "mango", "mushroom", "nut", "olive",
+                "pea", "peanut", "pear", "pepper", "pineapple", "pumpkin",
+                "potato"};
+        boolean right = false;
+        Random rand = new Random();
+        int fruitIndex = rand.nextInt(words.length);
+        String fruitName = words[fruitIndex];
+        print("Отгадайте слово");
+        Scanner scanner3 = new Scanner(System.in);
+        while (!right) {
+            print(fruitName);
+            String userWord = scanner3.next();
+            right = fruitName.equals(userWord);
+            if (!right) {
+                String maskedAnswer = "###############";
+                char[] maskedAnswerArray = maskedAnswer.toCharArray();
+                for (int i = 0; i < 15; i++) {
+                    if (i >= fruitName.length() || i>=userWord.length()) {
+                        break;
+                    }
+                    char originChare = fruitName.charAt(i);
+                    char userChoice = userWord.charAt(i);
+                    if (originChare == userChoice) {
+                        maskedAnswerArray[i] = originChare;
+                    }
+                }
+                printArray(maskedAnswerArray);
+            }
+            System.out.println(right);
+
+        }
+        scanner3.close();
     }
+
+
+    public static void print2dArray(int[][] arr) {
+        for (int y = 0; y < arr.length; y++) {
+            for (int x = 0; x < arr.length; x++) {
+                System.out.print(arr[y][x] + " ");
+            }
+            System.out.println();
+        }
+
+    }
+
 
     public static void printArray(int[] args) {
         System.out.println(Arrays.toString(args));
     }
+    public static void printArray(char[] args) {
+        System.out.println(Arrays.toString(args).replace(", ",""));
+    }
 
     public static void printTaskNumber(int number) {
         System.out.println("Задание " + number);
+    }
+
+    public static void print(String text) {
+        System.out.println(text);
     }
 
     public static int[] change(int[] arr) {
@@ -127,7 +225,5 @@ public class Task1 {
         }
         return arr;
     }
-
-
 }
 
